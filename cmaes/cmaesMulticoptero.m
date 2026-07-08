@@ -1,9 +1,9 @@
-function ganhos_opt = cmaesMulticoptero(custoMulticoptero, ganhos, ...
+function ganhos_opt = cmaesMulticoptero(custoMulticoptero, ganhos0, ...
     sigma0, lambda, max_iter)
 
 % inicializacao de parametros
-n = length(ganhos);
-m = ganhos(:); 
+n = length(ganhos0);
+m = ganhos0(:); 
 sigma = sigma0;
 mu = floor(lambda / 2);
 
@@ -75,5 +75,5 @@ for iter = 1:max_iter
     sigma = sigma * exp((cs / ds) * ((norm(ps) / EN) - 1));
 end
 
-ganhos_opt = ganhos;
+ganhos_opt = m;
 end
