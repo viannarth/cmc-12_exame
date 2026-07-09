@@ -1,9 +1,13 @@
-function ganhos_opt = cmaesMulticoptero(custoMulticoptero, ganhos0, ...
+function ganhos_opt = cmaesMulticoptero(custoMulticoptero, controlador, ...
     sigma0, lambda, max_iter)
 
 % inicializacao de parametros
-n = length(ganhos0);
-m = ganhos0(:); 
+m0 = [controlador.theta.Kp, controlador.theta.Kv, controlador.x.Kp, ...
+    controlador.x.Ki, controlador.x.Kd, controlador.z.Kp, controlador.z.Ki, ...
+    controlador.x.Kd]';
+
+n = length(m0);
+m = m0; 
 sigma = sigma0;
 mu = floor(lambda / 2);
 
