@@ -1,11 +1,7 @@
-function ganhos_opt = cmaesMulticoptero(custoMulticoptero, controlador, ...
-    sigma0, lambda, max_iter)
+function controlador_opt = cmaesMulticoptero(planta, m0, sigma0, lambda, ...
+    max_iter)
 
 % inicializacao de parametros
-m0 = [controlador.theta.Kp, controlador.theta.Kv, controlador.x.Kp, ...
-    controlador.x.Ki, controlador.x.Kd, controlador.z.Kp, controlador.z.Ki, ...
-    controlador.x.Kd]';
-
 n = length(m0);
 m = m0; 
 sigma = sigma0;
@@ -53,7 +49,7 @@ for iter = 1:max_iter
     for i = 1:lambda
         z = randn(n, 1);
         X(:, i) = m + sigma * (B * (D .* z));
-        fitness(i) = custoMulticoptero(X(:, i));
+        fitness(i) = custoMulticoptero(X(:, i), planta);
     end
     
     % ordenação da populacao (minimizacao)
@@ -79,5 +75,13 @@ for iter = 1:max_iter
     sigma = sigma * exp((cs / ds) * ((norm(ps) / EN) - 1));
 end
 
-ganhos_opt = m;
+controlador_opt.theta.Kp = exp(m(1));
+controlador_opt.theta.Kv = exp(m(2));
+controlador_opt.x.Ki = exp(m(3));
+controlador_opt.x.Kd = exp(m(4));
+controlador_opt.x.Kp = exp(m(5));
+controlador_opt.z.Ki = exp(m(6));
+controlador_opt.z.Kd = exp(m(7));
+controlador_opt.z.Kp = exp(m(8));
+
 end
