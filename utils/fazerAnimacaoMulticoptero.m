@@ -37,10 +37,6 @@ f2 = f / 2.0 + tau / l;
 f1 = 0.1 * f1;
 f2 = 0.1 * f2;
 
-% Criando um azul que nao machuca os olhos...
-% O azul puro 'b' fica terrivel num fundo preto puro 'k'...
-azulBacana = [0, 0.4470, 0.7410];
-
 close all;
 figure;
 hold on;
@@ -53,13 +49,14 @@ handlef2 = quiver(r2(1), r2(2), f2(1) * sin(theta(1)), f2(1) * cos(theta(1)));
 axis([meioX - tamanhoEixo / 2.0, meioX + tamanhoEixo / 2.0, 0.0, tamanhoEixo]);
 axis square;
 set(gca, 'nextplot', 'replacechildren');
-xlabel('X (m)', 'FontSize', 14);
-ylabel('Z (m)', 'FontSize', 14);
-set(gca, 'FontSize', 14);
+xlabel('X (m)', 'FontSize', 24);
+ylabel('Z (m)', 'FontSize', 24);
+set(gca, 'FontSize', 20);
 grid on;
 
 % Para salvar video (exibe animacao em tempo real)
-video = VideoWriter(sprintf('resultados/multicoptero_%c.avi', simulacao.experimento));
+video = VideoWriter([sprintf('resultados/exp_%c/', simulacao.experimento), ...
+    sprintf('multicoptero_%c.avi', simulacao.experimento)]);
 video.FrameRate = 60;
 video.Quality = 100;
 open(video);

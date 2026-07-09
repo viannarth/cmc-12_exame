@@ -15,7 +15,7 @@ set(gca, 'FontSize', 20);
 legend('Referencia', 'Executado', fontsize=20);
 grid on;
 axis equal;
-salvarGrafico(sprintf('x_z_%c', simulacao.experimento), formato);
+salvarGrafico('x_z', formato, simulacao.experimento);
 
 figure;
 plot(simulacao.xr.time, simulacao.xr.signals.values, 'r', 'LineWidth', 2);
@@ -26,7 +26,7 @@ ylabel('X (m)', 'FontSize', 24);
 set(gca, 'FontSize', 20);
 legend('Referencia', 'Executado', fontsize=20);
 grid on;
-salvarGrafico(sprintf('t_x_%c', simulacao.experimento), formato);
+salvarGrafico('t_x', formato, simulacao.experimento);
 
 figure;
 plot(simulacao.zr.time, simulacao.zr.signals.values, 'r', 'LineWidth', 2);
@@ -37,7 +37,7 @@ ylabel('Z (m)', 'FontSize', 24);
 set(gca, 'FontSize', 20);
 legend('Referencia', 'Executado', fontsize=20);
 grid on;
-salvarGrafico(sprintf('t_z_%c', simulacao.experimento), formato);
+salvarGrafico('t_z', formato, simulacao.experimento);
 
 figure;
 plot(simulacao.thetar.time, simulacao.thetar.signals.values, 'r', 'LineWidth', 2);
@@ -48,7 +48,7 @@ ylabel('\theta (rad)', 'FontSize', 24);
 set(gca, 'FontSize', 20);
 legend('Referencia', 'Executado', fontsize=20);
 grid on;
-salvarGrafico(sprintf('t_theta_%c', simulacao.experimento), formato);
+salvarGrafico('t_theta', formato, simulacao.experimento);
 
 figure;
 plot(simulacao.f.time, simulacao.f.signals.values, 'LineWidth', 2);
@@ -56,7 +56,7 @@ xlabel('Tempo (s)', 'FontSize', 24);
 ylabel('f (N)', 'FontSize', 24);
 set(gca, 'FontSize', 20);
 grid on;
-salvarGrafico(sprintf('t_f_%c', simulacao.experimento), formato);
+salvarGrafico('t_f', formato, simulacao.experimento);
 
 figure;
 plot(simulacao.tau.time, simulacao.tau.signals.values, 'LineWidth', 2);
@@ -64,22 +64,22 @@ xlabel('Tempo (s)', 'FontSize', 24);
 ylabel('\tau (N m)', 'FontSize', 24);
 set(gca, 'FontSize', 20);
 grid on;
-salvarGrafico(sprintf('t_tau_%c', simulacao.experimento), formato);
+salvarGrafico('t_tau', formato, simulacao.experimento);
 
 end
 
-function salvarGrafico(nome, formato)
+function salvarGrafico(nome, formato, experimento)
 % Salva o grafico corrente.
 % nome: nome do arquivo.
 % formato: formato do arquivo ('png' ou 'eps').
 
-pasta = 'resultados/';
+pasta = sprintf('resultados/exp_%c/', experimento);
 caminho_imagem = [pasta, nome];
 
-% if strcmp(formato, 'png')
-%     print('-dpng', '-r400', caminho_imagem);
-% else
-%     print('-depsc2', caminho_imagem);
-% end
+if strcmp(formato, 'png')
+    print('-dpng', '-r400', caminho_imagem);
+else
+    print('-depsc2', caminho_imagem);
+end
 
 end
