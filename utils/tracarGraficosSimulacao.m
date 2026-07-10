@@ -76,10 +76,10 @@ function salvarGrafico(nome, formato, experimento)
 pasta = sprintf('resultados/exp_%c/', experimento);
 caminho_imagem = [pasta, nome];
 
-if strcmp(formato, 'png')
-    print('-dpng', '-r400', caminho_imagem);
-else
-    print('-depsc2', caminho_imagem);
-end
+% if strcmp(formato, 'png')
+%     print('-dpng', '-r400', caminho_imagem);
+% else
+%     print('-depsc2', caminho_imagem);
+% end
 
 end
