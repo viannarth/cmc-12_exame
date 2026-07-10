@@ -53,7 +53,7 @@ for iter = 1:max_iter
         % adiciona mutacao por meio da distribuicao normal multivariada
         X(:, i) = m + sigma * (B * (D .* z)); 
         % avaliacao da amostra atual
-        fitness(i) = custoMulticoptero(X(:, i), planta);
+        fitness(i) = custoMulticoptero(X(:, i), m0, planta);
     end
     
     % ordenacao da populacao (minimizacao)

@@ -1,13 +1,17 @@
-function J = custoMulticoptero(m, planta)
+function J = custoMulticoptero(m, m0, planta)
+
+J_bounds = custoLimites(m, m0);
 
 controlador = obterControlador(m);
-
-experimentos = ['a', 'b', 'd', 'e'];
 
 J_bw = custoBandaPassante(controlador, planta);
 
 % flag se houve divergencia na simulacao
 divergencia = false;
+
+% avaliacao nos cenarios
+experimentos = ['a', 'b', 'd', 'e'];
+
 J_rastreamentos = zeros(length(experimentos), 1);
 for i = 1:length(experimentos)
     parametros = obterParametrosExperimento(experimentos(i));
@@ -21,7 +25,7 @@ for i = 1:length(experimentos)
     end
 end
 
-J = J_bw + mean(J_rastreamentos);
+J = J_bounds + J_bw + mean(J_rastreamentos);
 
 if divergencia
     J = J + 1e4; % penalidade agressiva se houver divergencia
