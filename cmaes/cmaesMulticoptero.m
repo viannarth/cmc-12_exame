@@ -66,8 +66,8 @@ for iter = 1:max_iter
     end
 
     % adicionar ao historico
-    historico.best_fitness = best_fitness;
-    historico.mean_fitness = mean(fitness);
+    historico.best_fitness(iter) = best_fitness;
+    historico.mean_fitness(iter) = mean(fitness);
 
     % atualizacao da populacao
     X_sorted = X(:, idx(1:mu));
