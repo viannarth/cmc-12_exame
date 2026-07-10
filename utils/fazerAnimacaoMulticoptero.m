@@ -55,8 +55,12 @@ set(gca, 'FontSize', 20);
 grid on;
 
 % Para salvar video (exibe animacao em tempo real)
-video = VideoWriter([sprintf('resultados/exp_%c/', simulacao.experimento), ...
-    sprintf('multicoptero_%c.avi', simulacao.experimento)]);
+pasta_saida = sprintf('resultados/exp_%c', simulacao.experimento);
+if ~exist(pasta_saida, 'dir')
+    mkdir(pasta_saida);
+end
+video = VideoWriter(fullfile(pasta_saida, ...
+    sprintf('multicoptero_%c.avi', simulacao.experimento)));
 video.FrameRate = 60;
 video.Quality = 100;
 open(video);
