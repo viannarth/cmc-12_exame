@@ -41,7 +41,8 @@ assignin('base', 'ventoX', parametros.ventoX);
 load_system('multicoptero');
 
 % Configurando o tempo final de simulacao
-set_param('multicoptero', 'StopTime', sprintf('%g', parametros.tf));
+set_param('multicoptero', 'StopTime', sprintf('%g', parametros.tf), ... 
+    'FastRestart','on');
 
 % Rodando a simulacao
 simulacao = sim('multicoptero');

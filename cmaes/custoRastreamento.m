@@ -1,11 +1,13 @@
-function J_rastreamento = custoRastreamento(simulacao)
+function J_rastreamento = custoRastreamento(simulacao, experimentos)
 
-ez = simulacao.zr.signals.values - simulacao.z.signals.values;
+[x_scale, z_scale] = obterEscalasRastreamento(experimentos);
+
 ex = simulacao.xr.signals.values - simulacao.x.signals.values;
+ez = simulacao.zr.signals.values - simulacao.z.signals.values;
 
-rmse_z = sqrt(mean(ez.^2));
-rmse_x = sqrt(mean(ex.^2));
+rmse_x = sqrt(mean(ex.^2)) / x_scale;
+rmse_z = sqrt(mean(ez.^2)) / z_scale;
 
-J_rastreamento = rmse_z + rmse_x;
+J_rastreamento = rmse_x + rmse_z;
 
 end
