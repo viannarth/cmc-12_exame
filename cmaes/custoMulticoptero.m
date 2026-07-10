@@ -4,9 +4,7 @@ controlador = obterControlador(m);
 
 experimentos = ['a', 'b', 'd', 'e'];
 
-margem_bw = 5;
-razao_bw = razaoLarguraBanda(controlador, planta);
-J_bw = 50 * max(0, margem_bw - razao_bw);
+J_bw = custoBandaPassante(controlador, planta);
 
 % flag se houve divergencia na simulacao
 divergencia = false;
@@ -15,11 +13,11 @@ for i = 1:length(experimentos)
     parametros = obterParametrosExperimento(experimentos(i));
     try
         simulacao = simularMulticoptero(controlador, planta, parametros);
-        J_rastreamentos(i) = custoRastreamento(simulacao, experimentos);
+        J_rastreamentos(i) = custoRastreamento(simulacao);
     catch
         divergencia = true;
         % logging da divergencia
-        fprintf('Divergencia com m = [%s]', num2str(m'));
+        fprintf('Divergencia com m = [%s]\n', num2str(m'));
     end
 end
 
