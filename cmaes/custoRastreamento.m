@@ -1,20 +1,17 @@
 function J_rastreamento = custoRastreamento(simulacao)
 
-ex = simulacao.xr.signals.values - simulacao.x.signals.values;
-ez = simulacao.zr.signals.values - simulacao.z.signals.values;
+xr = simulacao.xr.signals.values;
+zr = simulacao.zr.signals.values;
+ 
+escala_x = max(max(abs(xr)), 0.5);
+escala_z = max(max(abs(zr)), 0.5);
+ 
+ex = xr - simulacao.x.signals.values;
+ez = zr - simulacao.z.signals.values;
 
 % rmse normalizado
-if all(ex == 0)
-    rmse_x = 0;
-else
-    rmse_x = sqrt(mean(ex.^2)) / max(abs(ex));
-end
-
-if all(ez == 0)
-    rmse_z = 0;
-else
-    rmse_z = sqrt(mean(ez.^2)) / max(abs(ez));
-end
+rmse_x = sqrt(mean(ex.^2)) / escala_x;
+rmse_z = sqrt(mean(ez.^2)) / escala_z;
 
 J_rastreamento = 5*rmse_x + 5*rmse_z;
 

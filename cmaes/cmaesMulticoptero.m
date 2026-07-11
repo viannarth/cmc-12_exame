@@ -1,6 +1,16 @@
 function [controlador_opt, historico] = cmaesMulticoptero(planta, m0, ...
     sigma0, max_iter)
 
+% custo do baseline
+experimentos_treino = ['a', 'b', 'd', 'e'];
+controlador_baseline = obterControlador(m0);
+custo_baseline = zeros(length(experimentos_treino), 1);
+for i = 1:length(experimentos_treino)
+    parametros = obterParametrosExperimento(experimentos_treino(i));
+    simulacao_baseline = simularMulticoptero(controlador_baseline, planta, parametros);
+    custo_baseline(i) = custoRastreamento(simulacao_baseline);
+end
+
 % inicializacao de parametros gerais
 n = length(m0);
 m = m0;
@@ -53,7 +63,7 @@ for iter = 1:max_iter
         % adiciona mutacao por meio da distribuicao normal multivariada
         X(:, i) = m + sigma * (B * (D .* z)); 
         % avaliacao da amostra atual
-        fitness(i) = custoMulticoptero(X(:, i), m0, planta);
+        fitness(i) = custoMulticoptero(X(:, i), m0, planta, custo_baseline);
     end
     
     % ordenacao da populacao (minimizacao)

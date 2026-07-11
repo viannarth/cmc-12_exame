@@ -26,9 +26,9 @@ m0 = log([controlador_baseline.theta.Kp, controlador_baseline.theta.Kv, ...
     controlador_baseline.x.Kp, controlador_baseline.z.Ki, ...
     controlador_baseline.z.Kd, controlador_baseline.z.Kp]');
 
-sigma0 = 0.5;
+sigma0 = 0.3;
 
-max_iter = 5;
+max_iter = 15;
 
 %% rodar CMA-ES para obter controlador otimo
 [controlador_opt, historico] = cmaesMulticoptero(planta, m0, sigma0, ... 

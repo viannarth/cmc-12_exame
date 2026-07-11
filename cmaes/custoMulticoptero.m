@@ -1,4 +1,4 @@
-function J = custoMulticoptero(m, m0, planta)
+function J = custoMulticoptero(m, m0, planta, custo_baseline)
 
 J_bounds = custoLimites(m, m0);
 
@@ -17,7 +17,7 @@ for i = 1:length(experimentos)
     parametros = obterParametrosExperimento(experimentos(i));
     try
         simulacao = simularMulticoptero(controlador, planta, parametros);
-        J_rastreamentos(i) = custoRastreamento(simulacao);
+        J_rastreamentos(i) = custoRastreamento(simulacao) / custo_baseline(i);
     catch
         divergencia = true;
         % logging da divergencia
