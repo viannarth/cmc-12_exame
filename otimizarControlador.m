@@ -43,13 +43,13 @@ max_iter = 15;
 controlador_cmaes = controlador_opt.best; 
 
 %% escolher experimento para analise
-experimento = 'a';
+% experimento = 'a';
 % experimento = 'b';
 % experimento = 'c';
 % experimento = 'd';
 % experimento = 'e';
 % experimento = 'f';
-% experimento = 'g';
+experimento = 'g';
 
 parametros = obterParametrosExperimento(experimento);
 

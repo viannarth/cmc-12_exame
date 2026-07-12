@@ -2,7 +2,7 @@ function [controlador_opt, historico] = cmaesMulticoptero(planta, m0, ...
     sigma0, max_iter)
 
 % custo do baseline
-experimentos_treino = ['a', 'b', 'd', 'e'];
+experimentos_treino = ['a', 'b', 'd', 'e', 'f'];
 controlador_baseline = obterControlador(m0);
 custo_baseline = zeros(length(experimentos_treino), 1);
 for i = 1:length(experimentos_treino)
