@@ -19,5 +19,5 @@ Execute o script `otimizarControlador.m` para iniciar a execução do algoritmo 
 
 ## Autores
 
-Alunos: Arthur de Sousa Vianna, Matheus Lima Reis e João Victor Canedo Paranhos
-Professor: Prof. Marcos Máximo
+**Alunos**: Arthur de Sousa Vianna, Matheus Lima Reis e João Victor Canedo Paranhos  
+**Professor**: Prof. Marcos Máximo
